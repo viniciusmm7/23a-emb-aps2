@@ -12,6 +12,13 @@ LV_FONT_DECLARE(dseg40);
 
 #define SYMBOL_CLOCK "\xEF\x80\x97"
 
+#define SPD_PIO			PIOA
+#define SPD_PIO_ID		ID_PIOA
+#define SPD_IDX			19
+#define SPD_IDX_MASK	(1 << SPD_IDX)
+#define WHEEL_DIAM 		0.508
+#define PI 				3.141592
+
 /************************************************************************/
 /* LCD / LVGL                                                           */
 /************************************************************************/
@@ -75,16 +82,31 @@ extern void vApplicationMallocFailedHook(void) {
 	configASSERT( ( volatile void * ) NULL );
 }
 
+QueueHandle_t xQueueInterval;
 SemaphoreHandle_t xSemaphoreRTC;
+SemaphoreHandle_t xSemaphoreRTTOverflow;
 
 /************************************************************************/
 /* PROTOTYPES                                                           */
 /************************************************************************/
 void RTC_init(Rtc *rtc, uint32_t id_rtc, calendar t, uint32_t irq_type);
+static void RTT_init(float freqPrescale, uint32_t IrqNPulses, uint32_t rttIRQSource);
 
 /************************************************************************/
-/* lvgl                                                                 */
+/* callbacks                                                            */
 /************************************************************************/
+
+void RTT_Handler(void) {
+	uint32_t ul_status;
+	ul_status = rtt_get_status(RTT);
+
+	/* IRQ due to Alarm */
+	if ((ul_status & RTT_SR_ALMS) == RTT_SR_ALMS) {
+		RTT_init(1000, 6000, RTT_MR_ALMIEN);
+		BaseType_t xHigherPriorityTaskWoken = pdFALSE;
+		xSemaphoreGiveFromISR(xSemaphoreRTTOverflow, &xHigherPriorityTaskWoken);
+	}
+}
 
 /**
 * \brief Interrupt handler for the RTC. Refresh the display.
@@ -95,13 +117,13 @@ void RTC_Handler(void) {
 	
 	/* seccond tick */
 	if ((ul_status & RTC_SR_SEC) == RTC_SR_SEC) {
-		// o código para irq de segundo vem aqui
+		// o cï¿½digo para irq de segundo vem aqui
 		xSemaphoreGiveFromISR(xSemaphoreRTC, 0);
 	}
 	
 	/* Time or date alarm */
 	if ((ul_status & RTC_SR_ALARM) == RTC_SR_ALARM) {
-		// o código para irq de alame vem aqui
+		// o cï¿½digo para irq de alame vem aqui
 	}
 
 	rtc_clear_status(RTC, RTC_SCCR_SECCLR);
@@ -111,6 +133,17 @@ void RTC_Handler(void) {
 	rtc_clear_status(RTC, RTC_SCCR_CALCLR);
 	rtc_clear_status(RTC, RTC_SCCR_TDERRCLR);
 }
+
+void callback_spd(void) {
+	uint32_t value = rtt_read_timer_value(RTT);
+	RTT_init(1000, 6000, RTT_MR_ALMIEN);
+	BaseType_t xHigherPriorityTaskWoken = pdTRUE;
+	xQueueSendFromISR(xQueueInterval, &value, &xHigherPriorityTaskWoken);
+}
+
+/************************************************************************/
+/* lvgl                                                                 */
+/************************************************************************/
 
 // bike
 void lv_bike(void) {
@@ -144,7 +177,7 @@ void lv_bike(void) {
 	lv_obj_align_to(labelSpeed, labelSpeedTitle, LV_ALIGN_OUT_BOTTOM_LEFT, 0, 10);
 	lv_obj_set_style_text_font(labelSpeed, &dseg40, LV_STATE_DEFAULT);
 	lv_obj_set_style_text_color(labelSpeed, lv_color_white(), LV_STATE_DEFAULT);
-	lv_label_set_text_fmt(labelSpeed, "25");
+	lv_label_set_text_fmt(labelSpeed, "0");
 	
 	// ----- HORIZONTAL LINE 2 -----
 	lv_label_t *labelHLine2 = lv_label_create(lv_scr_act());
@@ -189,9 +222,9 @@ static void task_rtc(void *pvParameters) {
 		.month = 05,
 		.day = 01,
 		.week = 1,
-		.hour = 22,
-		.minute = 22,
-		.second = 22,
+		.hour = 17,
+		.minute = 12,
+		.second = 07,
 	};
 
 	RTC_init(RTC, ID_RTC, now, RTC_IER_SECEN);
@@ -202,11 +235,61 @@ static void task_rtc(void *pvParameters) {
 			rtc_get_time(RTC, &now.hour, &now.minute, &now.second);
 			rtc_get_date(RTC, &now.year, &now.month, &now.day, &now.week);
 
-			/* Atualização do valor do clock */
+			/* Atualizaï¿½ï¿½o do valor do clock */
 			lv_label_set_text_fmt(labelClock, "%02d:%02d:%02d", now.hour, now.minute, now.second);
 		}
 		vTaskDelay(700);
 	}
+}
+
+static void task_spd(void *pvParameters) {
+
+	pmc_enable_periph_clk(ID_PIOA);
+	pio_configure(PIOA, PIO_INPUT, SPD_IDX_MASK, PIO_PULLUP | PIO_DEBOUNCE);
+	pio_handler_set(PIOA, ID_PIOA, SPD_IDX_MASK, PIO_IT_FALL_EDGE, callback_spd);
+	pio_enable_interrupt(PIOA, SPD_IDX_MASK);
+	pio_get_interrupt_status(PIOA);
+	NVIC_EnableIRQ(ID_PIOA);
+	NVIC_SetPriority(ID_PIOA, 4);
+
+	RTT_init(1000, 6000, RTT_MR_ALMIEN);
+
+	float last_speed = 0;
+	float speed = 0;
+	float acc = 0;
+	uint32_t interval;
+
+	for (;;) {
+
+		if (xSemaphoreTake(xSemaphoreRTTOverflow, 0)) {
+			last_speed = 0;
+			speed = 0;
+			acc = 0;
+			lv_label_set_text_fmt(labelSpeed, "0");
+			lv_label_set_text_fmt(labelXLR8, LV_SYMBOL_MINUS);
+		}
+
+		if (xQueueReceive(xQueueInterval, (uint32_t *)&interval, 0)) {
+			speed = WHEEL_DIAM * PI * 3600.0 / (float) interval;
+			acc = (speed - last_speed) * 1000 / (float) interval;
+			last_speed = speed;
+			lv_label_set_text_fmt(labelSpeed, "%d", (int) speed);
+
+			if (acc > 1) {
+				lv_label_set_text_fmt(labelXLR8, LV_SYMBOL_UP);
+			}
+
+			else if (acc < -1) {
+				lv_label_set_text_fmt(labelXLR8, LV_SYMBOL_DOWN);
+			}
+
+			else {
+				lv_label_set_text_fmt(labelXLR8, LV_SYMBOL_MINUS);
+			}
+		}
+		
+	}
+
 }
 
 /************************************************************************/
@@ -239,6 +322,35 @@ static void configure_console(void) {
 
 	/* Specify that stdout should not be buffered. */
 	setbuf(stdout, NULL);
+}
+
+static void RTT_init(float freqPrescale, uint32_t IrqNPulses, uint32_t rttIRQSource) {
+
+	uint16_t pllPreScale = (int) (((float) 32768) / freqPrescale);
+
+	rtt_sel_source(RTT, false);
+	rtt_init(RTT, pllPreScale);
+
+	if (rttIRQSource & RTT_MR_ALMIEN) {
+		uint32_t ul_previous_time;
+		ul_previous_time = rtt_read_timer_value(RTT);
+		while (ul_previous_time == rtt_read_timer_value(RTT));
+		rtt_write_alarm_time(RTT, IrqNPulses+ul_previous_time);
+	}
+
+	/* config NVIC */
+	NVIC_DisableIRQ(RTT_IRQn);
+	NVIC_ClearPendingIRQ(RTT_IRQn);
+	NVIC_SetPriority(RTT_IRQn, 4);
+	NVIC_EnableIRQ(RTT_IRQn);
+
+	/* Enable RTT interrupt */
+	if (rttIRQSource & (RTT_MR_RTTINCIEN | RTT_MR_ALMIEN)) {
+		rtt_enable_interrupt(RTT, rttIRQSource);
+	}
+	else {
+		rtt_disable_interrupt(RTT, RTT_MR_RTTINCIEN | RTT_MR_ALMIEN);
+	}
 }
 
 /**
@@ -338,6 +450,18 @@ int main(void) {
 		printf("Failed to create RTC semaphore\n");
 	}
 
+	/* Attempt to create a semaphore. */
+	xSemaphoreRTTOverflow = xSemaphoreCreateBinary();
+	if (xSemaphoreRTTOverflow == NULL) {
+		printf("Failed to create RTT overflow semaphore\n");
+	}
+	
+	/* Attempt to create a queue. */
+	xQueueInterval = xQueueCreate(100, sizeof(uint32_t));
+	if (xQueueInterval == NULL) {
+		printf("Failed to create intervals queue\n");
+	}
+
 	/* Create task to control LCD */
 	if (xTaskCreate(task_lcd, "LCD", TASK_LCD_STACK_SIZE, NULL, TASK_LCD_STACK_PRIORITY, NULL) != pdPASS) {
 		printf("Failed to create lcd task\r\n");
@@ -346,6 +470,11 @@ int main(void) {
 	/* Create task to read RTC */
 	if (xTaskCreate(task_rtc, "RTC", TASK_RTC_STACK_SIZE, NULL, TASK_RTC_STACK_PRIORITY, NULL) != pdPASS) {
 		printf("Failed to create RTC task\r\n");
+	}
+
+	/* Create task to read SPD */
+	if (xTaskCreate(task_spd, "SPD", TASK_RTC_STACK_SIZE, NULL, TASK_RTC_STACK_PRIORITY, NULL) != pdPASS) {
+		printf("Failed to create SPD task\r\n");
 	}
 	
 	/* Start the scheduler. */
