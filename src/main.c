@@ -8,11 +8,7 @@
 #include "lvgl.h"
 #include "touch/touch.h"
 
-LV_FONT_DECLARE(dseg70);
-LV_FONT_DECLARE(dseg50);
 LV_FONT_DECLARE(dseg40);
-LV_FONT_DECLARE(dseg30);
-LV_FONT_DECLARE(clock);
 
 #define SYMBOL_CLOCK "\xEF\x80\x97"
 
@@ -120,14 +116,14 @@ void RTC_Handler(void) {
 void lv_bike(void) {
 	// ----- CLOCK -----
 	labelClock = lv_label_create(lv_scr_act());
-	lv_obj_align(labelClock, LV_ALIGN_TOP_MID, 0 , 30);
+	lv_obj_align(labelClock, LV_ALIGN_TOP_MID, 0 , 50);
 	lv_obj_set_style_text_font(labelClock, &dseg40, LV_STATE_DEFAULT);
 	lv_obj_set_style_text_color(labelClock, lv_color_white(), LV_STATE_DEFAULT);
 	lv_label_set_text_fmt(labelClock, "00:00:00");
 	
 	// ----- CLOCK TITLE -----
 	lv_label_t *labelClockTitle = lv_label_create(lv_scr_act());
-	lv_obj_align_to(labelClockTitle, labelClock, LV_ALIGN_OUT_TOP_LEFT, 0 , 0);
+	lv_obj_align_to(labelClockTitle, labelClock, LV_ALIGN_OUT_TOP_LEFT, 0 , -10);
 	lv_obj_set_style_text_color(labelClockTitle, lv_color_white(), LV_STATE_DEFAULT);
 	lv_label_set_text_fmt(labelClockTitle, "CLOCK");
 	
@@ -139,13 +135,13 @@ void lv_bike(void) {
 	
 	// ----- SPEED TITLE -----
 	lv_label_t *labelSpeedTitle = lv_label_create(lv_scr_act());
-	lv_obj_align_to(labelSpeedTitle, labelHLine1, LV_ALIGN_OUT_BOTTOM_LEFT, 0, 0);
+	lv_obj_align_to(labelSpeedTitle, labelHLine1, LV_ALIGN_OUT_BOTTOM_LEFT, 0, 10);
 	lv_obj_set_style_text_color(labelSpeedTitle, lv_color_white(), LV_STATE_DEFAULT);
 	lv_label_set_text_fmt(labelSpeedTitle, "SPEED   KM/H");
 	
 	// ----- SPEED -----
 	labelSpeed = lv_label_create(lv_scr_act());
-	lv_obj_align_to(labelSpeed, labelSpeedTitle, LV_ALIGN_OUT_BOTTOM_LEFT, 0, 0);
+	lv_obj_align_to(labelSpeed, labelSpeedTitle, LV_ALIGN_OUT_BOTTOM_LEFT, 0, 10);
 	lv_obj_set_style_text_font(labelSpeed, &dseg40, LV_STATE_DEFAULT);
 	lv_obj_set_style_text_color(labelSpeed, lv_color_white(), LV_STATE_DEFAULT);
 	lv_label_set_text_fmt(labelSpeed, "25");
@@ -158,13 +154,13 @@ void lv_bike(void) {
 	
 	// ----- XLR8 TITLE -----
 	lv_label_t *labelXLR8Title = lv_label_create(lv_scr_act());
-	lv_obj_align_to(labelXLR8Title, labelHLine2, LV_ALIGN_OUT_BOTTOM_LEFT, 0 , 0);
+	lv_obj_align_to(labelXLR8Title, labelHLine2, LV_ALIGN_OUT_BOTTOM_LEFT, 0 , 10);
 	lv_obj_set_style_text_color(labelXLR8Title, lv_color_white(), LV_STATE_DEFAULT);
 	lv_label_set_text_fmt(labelXLR8Title, "ACC");
 	
 	// ----- XLR8 -----
 	labelXLR8 = lv_label_create(lv_scr_act());
-	lv_obj_align_to(labelXLR8, labelXLR8Title, LV_ALIGN_OUT_BOTTOM_LEFT, 0, 0);
+	lv_obj_align_to(labelXLR8, labelXLR8Title, LV_ALIGN_OUT_BOTTOM_LEFT, 0, 10);
 	lv_obj_set_style_text_color(labelXLR8, lv_color_white(), LV_STATE_DEFAULT);
 	lv_label_set_text_fmt(labelXLR8, LV_SYMBOL_UP); /* If acc is positive */
 	//lv_label_set_text_fmt(labelXLR8, LV_SYMBOL_MINUS); /* If acc is aprox zero */
