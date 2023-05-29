@@ -4,7 +4,7 @@ src/ASF/thirdparty/lvgl8/src/extra/layouts/flex/lv_flex.d \
  ../src/ASF/thirdparty/lvgl8/src/extra/layouts/flex/../lv_layouts.h \
  ../src/ASF/thirdparty/lvgl8/src/extra/layouts/flex/../flex/lv_flex.h \
  ../src/ASF/thirdparty/lvgl8/src/extra/layouts/flex/../flex/../../../core/lv_obj.h \
- ../src/ASF/thirdparty/lvgl8/src/extra/layouts/flex/../flex/../../../core/../lv_conf_internal.h \
+ c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\lv_conf_internal.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\lib\gcc\arm-none-eabi\6.3.1\include\stdint.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\stdint.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\machine\_default_types.h \
@@ -12,16 +12,16 @@ src/ASF/thirdparty/lvgl8/src/extra/layouts/flex/lv_flex.d \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\_newlib_version.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\_intsup.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\_stdint.h \
- ../src/ASF/thirdparty/lvgl8/src/extra/layouts/flex/../flex/../../../core/../lv_conf_kconfig.h \
+ c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\lv_conf_kconfig.h \
  ../src/config/lv_conf.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\lib\gcc\arm-none-eabi\6.3.1\include\stddef.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\lib\gcc\arm-none-eabi\6.3.1\include\stdbool.h \
- ../src/ASF/thirdparty/lvgl8/src/extra/layouts/flex/../flex/../../../core/../misc/lv_style.h \
- c:\users\vinicius\documents\embarcados\23a-emb-aps2\src\asf\thirdparty\lvgl8\src\font\lv_font.h \
- c:\users\vinicius\documents\embarcados\23a-emb-aps2\src\asf\thirdparty\lvgl8\src\lv_conf_internal.h \
- c:\users\vinicius\documents\embarcados\23a-emb-aps2\src\asf\thirdparty\lvgl8\src\font\lv_symbol_def.h \
- c:\users\vinicius\documents\embarcados\23a-emb-aps2\src\asf\thirdparty\lvgl8\src\misc\lv_area.h \
- c:\users\vinicius\documents\embarcados\23a-emb-aps2\src\asf\thirdparty\lvgl8\src\lv_conf_internal.h \
+ c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\misc\lv_style.h \
+ c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\font\lv_font.h \
+ c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\lv_conf_internal.h \
+ c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\font\lv_symbol_def.h \
+ c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\misc\lv_area.h \
+ c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\lv_conf_internal.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\string.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\_ansi.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\newlib.h \
@@ -35,74 +35,70 @@ src/ASF/thirdparty/lvgl8/src/extra/layouts/flex/lv_flex.d \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\cdefs.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\xlocale.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\string.h \
- ../src/ASF/thirdparty/lvgl8/src/extra/layouts/flex/../flex/../../../core/../misc/lv_color.h \
- c:\users\vinicius\documents\embarcados\23a-emb-aps2\src\asf\thirdparty\lvgl8\src\lv_conf_internal.h \
- ../src/ASF/thirdparty/lvgl8/src/extra/layouts/flex/../flex/../../../core/../misc/lv_math.h \
- ../src/ASF/thirdparty/lvgl8/src/extra/layouts/flex/../flex/../../../core/../misc/lv_types.h \
- ../src/ASF/thirdparty/lvgl8/src/extra/layouts/flex/../flex/../../../core/../misc/lv_area.h \
- ../src/ASF/thirdparty/lvgl8/src/extra/layouts/flex/../flex/../../../core/../misc/lv_anim.h \
- ../src/ASF/thirdparty/lvgl8/src/extra/layouts/flex/../flex/../../../core/../misc/lv_txt.h \
+ c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\misc\lv_color.h \
+ c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\misc\lv_math.h \
+ c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\misc\lv_types.h \
+ c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\misc\lv_area.h \
+ c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\misc\lv_anim.h \
+ c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\misc\lv_txt.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\lib\gcc\arm-none-eabi\6.3.1\include\stdarg.h \
- ../src/ASF/thirdparty/lvgl8/src/extra/layouts/flex/../flex/../../../core/../misc/lv_printf.h \
+ c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\misc\lv_printf.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\inttypes.h \
- ../src/ASF/thirdparty/lvgl8/src/extra/layouts/flex/../flex/../../../core/../misc/lv_assert.h \
- ../src/ASF/thirdparty/lvgl8/src/extra/layouts/flex/../flex/../../../core/../misc/lv_bidi.h \
- ../src/ASF/thirdparty/lvgl8/src/extra/layouts/flex/../flex/../../../core/../misc/lv_style_gen.h \
- ../src/ASF/thirdparty/lvgl8/src/extra/layouts/flex/../flex/../../../core/../misc/lv_types.h \
- ../src/ASF/thirdparty/lvgl8/src/extra/layouts/flex/../flex/../../../core/../misc/lv_area.h \
- ../src/ASF/thirdparty/lvgl8/src/extra/layouts/flex/../flex/../../../core/../misc/lv_color.h \
- ../src/ASF/thirdparty/lvgl8/src/extra/layouts/flex/../flex/../../../core/../misc/lv_assert.h \
- ../src/ASF/thirdparty/lvgl8/src/extra/layouts/flex/../flex/../../../core/../hal/lv_hal.h \
- ../src/ASF/thirdparty/lvgl8/src/extra/layouts/flex/../flex/../../../core/../hal/lv_hal_disp.h \
- ../src/ASF/thirdparty/lvgl8/src/extra/layouts/flex/../flex/../../../core/../hal/lv_hal.h \
- c:\users\vinicius\documents\embarcados\23a-emb-aps2\src\asf\thirdparty\lvgl8\src\draw\lv_img_buf.h \
- c:\users\vinicius\documents\embarcados\23a-emb-aps2\src\asf\thirdparty\lvgl8\src\misc\lv_color.h \
- c:\users\vinicius\documents\embarcados\23a-emb-aps2\src\asf\thirdparty\lvgl8\src\misc\lv_area.h \
- c:\users\vinicius\documents\embarcados\23a-emb-aps2\src\asf\thirdparty\lvgl8\src\misc\lv_color.h \
- c:\users\vinicius\documents\embarcados\23a-emb-aps2\src\asf\thirdparty\lvgl8\src\misc\lv_area.h \
- c:\users\vinicius\documents\embarcados\23a-emb-aps2\src\asf\thirdparty\lvgl8\src\misc\lv_ll.h \
- c:\users\vinicius\documents\embarcados\23a-emb-aps2\src\asf\thirdparty\lvgl8\src\misc\lv_timer.h \
- c:\users\vinicius\documents\embarcados\23a-emb-aps2\src\asf\thirdparty\lvgl8\src\misc\lv_mem.h \
- c:\users\vinicius\documents\embarcados\23a-emb-aps2\src\asf\thirdparty\lvgl8\src\misc\lv_log.h \
- c:\users\vinicius\documents\embarcados\23a-emb-aps2\src\asf\thirdparty\lvgl8\src\misc\lv_types.h \
- c:\users\vinicius\documents\embarcados\23a-emb-aps2\src\asf\thirdparty\lvgl8\src\misc\lv_ll.h \
- ../src/ASF/thirdparty/lvgl8/src/extra/layouts/flex/../flex/../../../core/../hal/lv_hal_indev.h \
- c:\users\vinicius\documents\embarcados\23a-emb-aps2\src\asf\thirdparty\lvgl8\src\lv_conf_internal.h \
- ../src/ASF/thirdparty/lvgl8/src/extra/layouts/flex/../flex/../../../core/../hal/lv_hal_tick.h \
+ c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\misc\lv_assert.h \
+ c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\misc\lv_bidi.h \
+ c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\misc\lv_style_gen.h \
+ c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\misc\lv_types.h \
+ c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\misc\lv_area.h \
+ c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\misc\lv_color.h \
+ c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\misc\lv_assert.h \
+ c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\hal\lv_hal.h \
+ c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\hal\lv_hal_disp.h \
+ c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\hal\lv_hal.h \
+ c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\draw\lv_img_buf.h \
+ c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\misc\lv_color.h \
+ c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\misc\lv_area.h \
+ c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\misc\lv_color.h \
+ c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\misc\lv_area.h \
+ c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\misc\lv_ll.h \
+ c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\misc\lv_timer.h \
+ c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\misc\lv_mem.h \
+ c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\misc\lv_log.h \
+ c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\misc\lv_ll.h \
+ c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\hal\lv_hal_indev.h \
+ c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\lv_conf_internal.h \
+ c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\hal\lv_hal_tick.h \
  ../src/ASF/thirdparty/lvgl8/src/extra/layouts/flex/../flex/../../../core/lv_obj_tree.h \
  ../src/ASF/thirdparty/lvgl8/src/extra/layouts/flex/../flex/../../../core/lv_obj_pos.h \
  ../src/ASF/thirdparty/lvgl8/src/extra/layouts/flex/../flex/../../../core/lv_obj_scroll.h \
- ../src/ASF/thirdparty/lvgl8/src/extra/layouts/flex/../flex/../../../core/../misc/lv_anim.h \
+ c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\misc\lv_anim.h \
  ../src/ASF/thirdparty/lvgl8/src/extra/layouts/flex/../flex/../../../core/lv_obj_style.h \
- ../src/ASF/thirdparty/lvgl8/src/extra/layouts/flex/../flex/../../../core/../misc/lv_bidi.h \
+ c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\misc\lv_bidi.h \
  ../src/ASF/thirdparty/lvgl8/src/extra/layouts/flex/../flex/../../../core/lv_obj_style_gen.h \
  ../src/ASF/thirdparty/lvgl8/src/extra/layouts/flex/../flex/../../../core/lv_obj_draw.h \
- ../src/ASF/thirdparty/lvgl8/src/extra/layouts/flex/../flex/../../../core/../draw/lv_draw.h \
- c:\users\vinicius\documents\embarcados\23a-emb-aps2\src\asf\thirdparty\lvgl8\src\lv_conf_internal.h \
- c:\users\vinicius\documents\embarcados\23a-emb-aps2\src\asf\thirdparty\lvgl8\src\misc\lv_style.h \
- c:\users\vinicius\documents\embarcados\23a-emb-aps2\src\asf\thirdparty\lvgl8\src\misc\lv_txt.h \
- ../src/ASF/thirdparty/lvgl8/src/extra/layouts/flex/../flex/../../../core/../draw/lv_img_decoder.h \
- ../src/ASF/thirdparty/lvgl8/src/extra/layouts/flex/../flex/../../../core/../draw/lv_img_buf.h \
- c:\users\vinicius\documents\embarcados\23a-emb-aps2\src\asf\thirdparty\lvgl8\src\misc\lv_fs.h \
- c:\users\vinicius\documents\embarcados\23a-emb-aps2\src\asf\thirdparty\lvgl8\src\misc\lv_types.h \
- c:\users\vinicius\documents\embarcados\23a-emb-aps2\src\asf\thirdparty\lvgl8\src\misc\lv_area.h \
- ../src/ASF/thirdparty/lvgl8/src/extra/layouts/flex/../flex/../../../core/../draw/lv_img_cache.h \
- ../src/ASF/thirdparty/lvgl8/src/extra/layouts/flex/../flex/../../../core/../draw/lv_draw_rect.h \
- ../src/ASF/thirdparty/lvgl8/src/extra/layouts/flex/../flex/../../../core/../draw/lv_draw_blend.h \
- c:\users\vinicius\documents\embarcados\23a-emb-aps2\src\asf\thirdparty\lvgl8\src\misc\lv_color.h \
- ../src/ASF/thirdparty/lvgl8/src/extra/layouts/flex/../flex/../../../core/../draw/lv_draw_mask.h \
- c:\users\vinicius\documents\embarcados\23a-emb-aps2\src\asf\thirdparty\lvgl8\src\misc\lv_math.h \
- c:\users\vinicius\documents\embarcados\23a-emb-aps2\src\asf\thirdparty\lvgl8\src\font\lv_font.h \
- ../src/ASF/thirdparty/lvgl8/src/extra/layouts/flex/../flex/../../../core/../draw/lv_draw_label.h \
- c:\users\vinicius\documents\embarcados\23a-emb-aps2\src\asf\thirdparty\lvgl8\src\misc\lv_bidi.h \
- ../src/ASF/thirdparty/lvgl8/src/extra/layouts/flex/../flex/../../../core/../draw/lv_draw_img.h \
- ../src/ASF/thirdparty/lvgl8/src/extra/layouts/flex/../flex/../../../core/../draw/lv_draw_line.h \
- ../src/ASF/thirdparty/lvgl8/src/extra/layouts/flex/../flex/../../../core/../draw/lv_draw_triangle.h \
- ../src/ASF/thirdparty/lvgl8/src/extra/layouts/flex/../flex/../../../core/../draw/lv_draw_arc.h \
+ c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\draw\lv_draw.h \
+ c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\lv_conf_internal.h \
+ c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\misc\lv_style.h \
+ c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\misc\lv_txt.h \
+ c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\draw\lv_img_decoder.h \
+ c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\draw\lv_img_buf.h \
+ c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\misc\lv_fs.h \
+ c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\misc\lv_types.h \
+ c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\draw\lv_img_cache.h \
+ c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\draw\lv_draw_rect.h \
+ c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\draw\lv_draw_blend.h \
+ c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\draw\lv_draw_mask.h \
+ c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\misc\lv_math.h \
+ c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\font\lv_font.h \
+ c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\draw\lv_draw_label.h \
+ c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\misc\lv_bidi.h \
+ c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\draw\lv_draw_img.h \
+ c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\draw\lv_draw_line.h \
+ c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\draw\lv_draw_triangle.h \
+ c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\draw\lv_draw_arc.h \
  ../src/ASF/thirdparty/lvgl8/src/extra/layouts/flex/../flex/../../../core/lv_obj_class.h \
  ../src/ASF/thirdparty/lvgl8/src/extra/layouts/flex/../flex/../../../core/lv_event.h \
  ../src/ASF/thirdparty/lvgl8/src/extra/layouts/flex/../flex/../../../core/lv_group.h \
- ../src/ASF/thirdparty/lvgl8/src/extra/layouts/flex/../flex/../../../core/../misc/lv_ll.h \
+ c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\misc\lv_ll.h \
  ../src/ASF/thirdparty/lvgl8/src/extra/layouts/flex/../grid/lv_grid.h \
  ../src/ASF/thirdparty/lvgl8/src/extra/layouts/flex/../grid/../../../core/lv_obj.h
 
@@ -112,7 +108,7 @@ src/ASF/thirdparty/lvgl8/src/extra/layouts/flex/lv_flex.d \
 
 ../src/ASF/thirdparty/lvgl8/src/extra/layouts/flex/../flex/../../../core/lv_obj.h:
 
-../src/ASF/thirdparty/lvgl8/src/extra/layouts/flex/../flex/../../../core/../lv_conf_internal.h:
+c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\lv_conf_internal.h:
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\lib\gcc\arm-none-eabi\6.3.1\include\stdint.h:
 
@@ -128,7 +124,7 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\_stdint.h:
 
-../src/ASF/thirdparty/lvgl8/src/extra/layouts/flex/../flex/../../../core/../lv_conf_kconfig.h:
+c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\lv_conf_kconfig.h:
 
 ../src/config/lv_conf.h:
 
@@ -136,17 +132,17 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\lib\gc
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\lib\gcc\arm-none-eabi\6.3.1\include\stdbool.h:
 
-../src/ASF/thirdparty/lvgl8/src/extra/layouts/flex/../flex/../../../core/../misc/lv_style.h:
+c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\misc\lv_style.h:
 
-c:\users\vinicius\documents\embarcados\23a-emb-aps2\src\asf\thirdparty\lvgl8\src\font\lv_font.h:
+c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\font\lv_font.h:
 
-c:\users\vinicius\documents\embarcados\23a-emb-aps2\src\asf\thirdparty\lvgl8\src\lv_conf_internal.h:
+c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\lv_conf_internal.h:
 
-c:\users\vinicius\documents\embarcados\23a-emb-aps2\src\asf\thirdparty\lvgl8\src\font\lv_symbol_def.h:
+c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\font\lv_symbol_def.h:
 
-c:\users\vinicius\documents\embarcados\23a-emb-aps2\src\asf\thirdparty\lvgl8\src\misc\lv_area.h:
+c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\misc\lv_area.h:
 
-c:\users\vinicius\documents\embarcados\23a-emb-aps2\src\asf\thirdparty\lvgl8\src\lv_conf_internal.h:
+c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\lv_conf_internal.h:
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\string.h:
 
@@ -174,73 +170,69 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\string.h:
 
-../src/ASF/thirdparty/lvgl8/src/extra/layouts/flex/../flex/../../../core/../misc/lv_color.h:
+c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\misc\lv_color.h:
 
-c:\users\vinicius\documents\embarcados\23a-emb-aps2\src\asf\thirdparty\lvgl8\src\lv_conf_internal.h:
+c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\misc\lv_math.h:
 
-../src/ASF/thirdparty/lvgl8/src/extra/layouts/flex/../flex/../../../core/../misc/lv_math.h:
+c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\misc\lv_types.h:
 
-../src/ASF/thirdparty/lvgl8/src/extra/layouts/flex/../flex/../../../core/../misc/lv_types.h:
+c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\misc\lv_area.h:
 
-../src/ASF/thirdparty/lvgl8/src/extra/layouts/flex/../flex/../../../core/../misc/lv_area.h:
+c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\misc\lv_anim.h:
 
-../src/ASF/thirdparty/lvgl8/src/extra/layouts/flex/../flex/../../../core/../misc/lv_anim.h:
-
-../src/ASF/thirdparty/lvgl8/src/extra/layouts/flex/../flex/../../../core/../misc/lv_txt.h:
+c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\misc\lv_txt.h:
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\lib\gcc\arm-none-eabi\6.3.1\include\stdarg.h:
 
-../src/ASF/thirdparty/lvgl8/src/extra/layouts/flex/../flex/../../../core/../misc/lv_printf.h:
+c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\misc\lv_printf.h:
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\inttypes.h:
 
-../src/ASF/thirdparty/lvgl8/src/extra/layouts/flex/../flex/../../../core/../misc/lv_assert.h:
+c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\misc\lv_assert.h:
 
-../src/ASF/thirdparty/lvgl8/src/extra/layouts/flex/../flex/../../../core/../misc/lv_bidi.h:
+c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\misc\lv_bidi.h:
 
-../src/ASF/thirdparty/lvgl8/src/extra/layouts/flex/../flex/../../../core/../misc/lv_style_gen.h:
+c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\misc\lv_style_gen.h:
 
-../src/ASF/thirdparty/lvgl8/src/extra/layouts/flex/../flex/../../../core/../misc/lv_types.h:
+c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\misc\lv_types.h:
 
-../src/ASF/thirdparty/lvgl8/src/extra/layouts/flex/../flex/../../../core/../misc/lv_area.h:
+c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\misc\lv_area.h:
 
-../src/ASF/thirdparty/lvgl8/src/extra/layouts/flex/../flex/../../../core/../misc/lv_color.h:
+c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\misc\lv_color.h:
 
-../src/ASF/thirdparty/lvgl8/src/extra/layouts/flex/../flex/../../../core/../misc/lv_assert.h:
+c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\misc\lv_assert.h:
 
-../src/ASF/thirdparty/lvgl8/src/extra/layouts/flex/../flex/../../../core/../hal/lv_hal.h:
+c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\hal\lv_hal.h:
 
-../src/ASF/thirdparty/lvgl8/src/extra/layouts/flex/../flex/../../../core/../hal/lv_hal_disp.h:
+c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\hal\lv_hal_disp.h:
 
-../src/ASF/thirdparty/lvgl8/src/extra/layouts/flex/../flex/../../../core/../hal/lv_hal.h:
+c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\hal\lv_hal.h:
 
-c:\users\vinicius\documents\embarcados\23a-emb-aps2\src\asf\thirdparty\lvgl8\src\draw\lv_img_buf.h:
+c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\draw\lv_img_buf.h:
 
-c:\users\vinicius\documents\embarcados\23a-emb-aps2\src\asf\thirdparty\lvgl8\src\misc\lv_color.h:
+c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\misc\lv_color.h:
 
-c:\users\vinicius\documents\embarcados\23a-emb-aps2\src\asf\thirdparty\lvgl8\src\misc\lv_area.h:
+c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\misc\lv_area.h:
 
-c:\users\vinicius\documents\embarcados\23a-emb-aps2\src\asf\thirdparty\lvgl8\src\misc\lv_color.h:
+c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\misc\lv_color.h:
 
-c:\users\vinicius\documents\embarcados\23a-emb-aps2\src\asf\thirdparty\lvgl8\src\misc\lv_area.h:
+c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\misc\lv_area.h:
 
-c:\users\vinicius\documents\embarcados\23a-emb-aps2\src\asf\thirdparty\lvgl8\src\misc\lv_ll.h:
+c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\misc\lv_ll.h:
 
-c:\users\vinicius\documents\embarcados\23a-emb-aps2\src\asf\thirdparty\lvgl8\src\misc\lv_timer.h:
+c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\misc\lv_timer.h:
 
-c:\users\vinicius\documents\embarcados\23a-emb-aps2\src\asf\thirdparty\lvgl8\src\misc\lv_mem.h:
+c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\misc\lv_mem.h:
 
-c:\users\vinicius\documents\embarcados\23a-emb-aps2\src\asf\thirdparty\lvgl8\src\misc\lv_log.h:
+c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\misc\lv_log.h:
 
-c:\users\vinicius\documents\embarcados\23a-emb-aps2\src\asf\thirdparty\lvgl8\src\misc\lv_types.h:
+c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\misc\lv_ll.h:
 
-c:\users\vinicius\documents\embarcados\23a-emb-aps2\src\asf\thirdparty\lvgl8\src\misc\lv_ll.h:
+c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\hal\lv_hal_indev.h:
 
-../src/ASF/thirdparty/lvgl8/src/extra/layouts/flex/../flex/../../../core/../hal/lv_hal_indev.h:
+c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\lv_conf_internal.h:
 
-c:\users\vinicius\documents\embarcados\23a-emb-aps2\src\asf\thirdparty\lvgl8\src\lv_conf_internal.h:
-
-../src/ASF/thirdparty/lvgl8/src/extra/layouts/flex/../flex/../../../core/../hal/lv_hal_tick.h:
+c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\hal\lv_hal_tick.h:
 
 ../src/ASF/thirdparty/lvgl8/src/extra/layouts/flex/../flex/../../../core/lv_obj_tree.h:
 
@@ -248,59 +240,55 @@ c:\users\vinicius\documents\embarcados\23a-emb-aps2\src\asf\thirdparty\lvgl8\src
 
 ../src/ASF/thirdparty/lvgl8/src/extra/layouts/flex/../flex/../../../core/lv_obj_scroll.h:
 
-../src/ASF/thirdparty/lvgl8/src/extra/layouts/flex/../flex/../../../core/../misc/lv_anim.h:
+c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\misc\lv_anim.h:
 
 ../src/ASF/thirdparty/lvgl8/src/extra/layouts/flex/../flex/../../../core/lv_obj_style.h:
 
-../src/ASF/thirdparty/lvgl8/src/extra/layouts/flex/../flex/../../../core/../misc/lv_bidi.h:
+c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\misc\lv_bidi.h:
 
 ../src/ASF/thirdparty/lvgl8/src/extra/layouts/flex/../flex/../../../core/lv_obj_style_gen.h:
 
 ../src/ASF/thirdparty/lvgl8/src/extra/layouts/flex/../flex/../../../core/lv_obj_draw.h:
 
-../src/ASF/thirdparty/lvgl8/src/extra/layouts/flex/../flex/../../../core/../draw/lv_draw.h:
+c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\draw\lv_draw.h:
 
-c:\users\vinicius\documents\embarcados\23a-emb-aps2\src\asf\thirdparty\lvgl8\src\lv_conf_internal.h:
+c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\lv_conf_internal.h:
 
-c:\users\vinicius\documents\embarcados\23a-emb-aps2\src\asf\thirdparty\lvgl8\src\misc\lv_style.h:
+c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\misc\lv_style.h:
 
-c:\users\vinicius\documents\embarcados\23a-emb-aps2\src\asf\thirdparty\lvgl8\src\misc\lv_txt.h:
+c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\misc\lv_txt.h:
 
-../src/ASF/thirdparty/lvgl8/src/extra/layouts/flex/../flex/../../../core/../draw/lv_img_decoder.h:
+c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\draw\lv_img_decoder.h:
 
-../src/ASF/thirdparty/lvgl8/src/extra/layouts/flex/../flex/../../../core/../draw/lv_img_buf.h:
+c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\draw\lv_img_buf.h:
 
-c:\users\vinicius\documents\embarcados\23a-emb-aps2\src\asf\thirdparty\lvgl8\src\misc\lv_fs.h:
+c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\misc\lv_fs.h:
 
-c:\users\vinicius\documents\embarcados\23a-emb-aps2\src\asf\thirdparty\lvgl8\src\misc\lv_types.h:
+c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\misc\lv_types.h:
 
-c:\users\vinicius\documents\embarcados\23a-emb-aps2\src\asf\thirdparty\lvgl8\src\misc\lv_area.h:
+c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\draw\lv_img_cache.h:
 
-../src/ASF/thirdparty/lvgl8/src/extra/layouts/flex/../flex/../../../core/../draw/lv_img_cache.h:
+c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\draw\lv_draw_rect.h:
 
-../src/ASF/thirdparty/lvgl8/src/extra/layouts/flex/../flex/../../../core/../draw/lv_draw_rect.h:
+c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\draw\lv_draw_blend.h:
 
-../src/ASF/thirdparty/lvgl8/src/extra/layouts/flex/../flex/../../../core/../draw/lv_draw_blend.h:
+c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\draw\lv_draw_mask.h:
 
-c:\users\vinicius\documents\embarcados\23a-emb-aps2\src\asf\thirdparty\lvgl8\src\misc\lv_color.h:
+c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\misc\lv_math.h:
 
-../src/ASF/thirdparty/lvgl8/src/extra/layouts/flex/../flex/../../../core/../draw/lv_draw_mask.h:
+c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\font\lv_font.h:
 
-c:\users\vinicius\documents\embarcados\23a-emb-aps2\src\asf\thirdparty\lvgl8\src\misc\lv_math.h:
+c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\draw\lv_draw_label.h:
 
-c:\users\vinicius\documents\embarcados\23a-emb-aps2\src\asf\thirdparty\lvgl8\src\font\lv_font.h:
+c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\misc\lv_bidi.h:
 
-../src/ASF/thirdparty/lvgl8/src/extra/layouts/flex/../flex/../../../core/../draw/lv_draw_label.h:
+c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\draw\lv_draw_img.h:
 
-c:\users\vinicius\documents\embarcados\23a-emb-aps2\src\asf\thirdparty\lvgl8\src\misc\lv_bidi.h:
+c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\draw\lv_draw_line.h:
 
-../src/ASF/thirdparty/lvgl8/src/extra/layouts/flex/../flex/../../../core/../draw/lv_draw_img.h:
+c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\draw\lv_draw_triangle.h:
 
-../src/ASF/thirdparty/lvgl8/src/extra/layouts/flex/../flex/../../../core/../draw/lv_draw_line.h:
-
-../src/ASF/thirdparty/lvgl8/src/extra/layouts/flex/../flex/../../../core/../draw/lv_draw_triangle.h:
-
-../src/ASF/thirdparty/lvgl8/src/extra/layouts/flex/../flex/../../../core/../draw/lv_draw_arc.h:
+c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\draw\lv_draw_arc.h:
 
 ../src/ASF/thirdparty/lvgl8/src/extra/layouts/flex/../flex/../../../core/lv_obj_class.h:
 
@@ -308,7 +296,7 @@ c:\users\vinicius\documents\embarcados\23a-emb-aps2\src\asf\thirdparty\lvgl8\src
 
 ../src/ASF/thirdparty/lvgl8/src/extra/layouts/flex/../flex/../../../core/lv_group.h:
 
-../src/ASF/thirdparty/lvgl8/src/extra/layouts/flex/../flex/../../../core/../misc/lv_ll.h:
+c:\users\jeronimo\2023-1\embarcada\aps02\src\asf\thirdparty\lvgl8\src\misc\lv_ll.h:
 
 ../src/ASF/thirdparty/lvgl8/src/extra/layouts/flex/../grid/lv_grid.h:
 

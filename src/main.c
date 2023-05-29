@@ -12,6 +12,11 @@ LV_FONT_DECLARE(dseg40);
 
 #define SYMBOL_CLOCK "\xEF\x80\x97"
 
+#define SPD_PIO			PIOA
+#define SPD_PIO_ID		ID_PIOA
+#define SPD_IDX			19
+#define SPD_IDX_MASK	(1 << SPD_IDX)
+
 /************************************************************************/
 /* LCD / LVGL                                                           */
 /************************************************************************/
@@ -83,7 +88,7 @@ SemaphoreHandle_t xSemaphoreRTC;
 void RTC_init(Rtc *rtc, uint32_t id_rtc, calendar t, uint32_t irq_type);
 
 /************************************************************************/
-/* lvgl                                                                 */
+/* callbacks                                                                 */
 /************************************************************************/
 
 /**
@@ -95,13 +100,13 @@ void RTC_Handler(void) {
 	
 	/* seccond tick */
 	if ((ul_status & RTC_SR_SEC) == RTC_SR_SEC) {
-		// o código para irq de segundo vem aqui
+		// o cï¿½digo para irq de segundo vem aqui
 		xSemaphoreGiveFromISR(xSemaphoreRTC, 0);
 	}
 	
 	/* Time or date alarm */
 	if ((ul_status & RTC_SR_ALARM) == RTC_SR_ALARM) {
-		// o código para irq de alame vem aqui
+		// o cï¿½digo para irq de alame vem aqui
 	}
 
 	rtc_clear_status(RTC, RTC_SCCR_SECCLR);
@@ -111,6 +116,14 @@ void RTC_Handler(void) {
 	rtc_clear_status(RTC, RTC_SCCR_CALCLR);
 	rtc_clear_status(RTC, RTC_SCCR_TDERRCLR);
 }
+
+void callback_spd(void) {
+	
+}
+
+/************************************************************************/
+/* lvgl                                                                 */
+/************************************************************************/
 
 // bike
 void lv_bike(void) {
@@ -202,11 +215,27 @@ static void task_rtc(void *pvParameters) {
 			rtc_get_time(RTC, &now.hour, &now.minute, &now.second);
 			rtc_get_date(RTC, &now.year, &now.month, &now.day, &now.week);
 
-			/* Atualização do valor do clock */
+			/* Atualizaï¿½ï¿½o do valor do clock */
 			lv_label_set_text_fmt(labelClock, "%02d:%02d:%02d", now.hour, now.minute, now.second);
 		}
 		vTaskDelay(700);
 	}
+}
+
+static void task_spd(void *pvParameters) {
+
+	pmc_enable_periph_clk(ID_PIOA);
+	pio_configure(PIOA, PIO_INPUT, SPD_IDX_MASK, PIO_PULLUP | PIO_DEBOUNCE);
+	pio_handler_set(PIOA, ID_PIOA, SPD_IDX_MASK, PIO_IT_FALL_EDGE, callback_spd);
+	pio_enable_interrupt(PIOA, SPD_IDX_MASK);
+	pio_get_interrupt_status(PIOA);
+	NVIC_EnableIRQ(ID_PIOA);
+	NVIC_SetPriority(ID_PIOA, 4);
+
+	for (;;) {
+		
+	}
+
 }
 
 /************************************************************************/
@@ -346,6 +375,11 @@ int main(void) {
 	/* Create task to read RTC */
 	if (xTaskCreate(task_rtc, "RTC", TASK_RTC_STACK_SIZE, NULL, TASK_RTC_STACK_PRIORITY, NULL) != pdPASS) {
 		printf("Failed to create RTC task\r\n");
+	}
+
+	/* Create task to read SPD */
+	if (xTaskCreate(task_spd, "SPD", TASK_RTC_STACK_SIZE, NULL, TASK_RTC_STACK_PRIORITY, NULL) != pdPASS) {
+		printf("Failed to create SPD task\r\n");
 	}
 	
 	/* Start the scheduler. */
