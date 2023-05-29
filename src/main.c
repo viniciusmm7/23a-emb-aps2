@@ -37,8 +37,9 @@ static lv_color_t buf_1[LV_HOR_RES_MAX * LV_VER_RES_MAX];
 static lv_disp_drv_t disp_drv;          /*A variable to hold the drivers. Must be static or global.*/
 static lv_indev_drv_t indev_drv;
 
-static lv_obj_t *labelSetValue;
 static lv_obj_t *labelClock;
+static lv_obj_t *labelSpeed;
+static lv_obj_t *labelXLR8;
 
 typedef struct  {
 	uint32_t year;
@@ -115,186 +116,57 @@ void RTC_Handler(void) {
 	rtc_clear_status(RTC, RTC_SCCR_TDERRCLR);
 }
 
-static void power_handler(lv_event_t * e) {
-	LV_LOG_USER("Clicked power");
-}
-
-static void menu_handler(lv_event_t * e) {
-	LV_LOG_USER("Clicked menu");
-}
-
-static void clk_handler(lv_event_t * e) {
-	LV_LOG_USER("Clicked clock");
-}
-
-static void home_handler(lv_event_t * e) {
-	LV_LOG_USER("Clicked home");
-}
-
-static void down_handler(lv_event_t * e) {
-	lv_event_code_t code = lv_event_get_code(e);
-	char *c;
-	int temp;
-	if (code == LV_EVENT_CLICKED) {
-		c = lv_label_get_text(labelSetValue);
-		temp = atoi(c);
-		lv_label_set_text_fmt(labelSetValue, "%02d", temp - 1);
-	}
-}
-
-static void up_handler(lv_event_t * e) {
-	lv_event_code_t code = lv_event_get_code(e);
-	char *c;
-	int temp;
-	if (code == LV_EVENT_CLICKED) {
-		c = lv_label_get_text(labelSetValue);
-		temp = atoi(c);
-		lv_label_set_text_fmt(labelSetValue, "%02d", temp + 1);
-	}
-}
-
-// termostato
-void lv_termostato(void) {
-	float floor_temperature = 23.4;
-	
-	static lv_style_t style;
-	lv_style_init(&style);
-	lv_style_set_bg_color(&style, lv_color_black());
-	
-	// ----- POWER -----
-	lv_obj_t *labelLeftBracket1 = lv_label_create(lv_scr_act());
-	lv_obj_align(labelLeftBracket1, LV_ALIGN_BOTTOM_LEFT, 4, -20);
-	lv_obj_set_style_text_color(labelLeftBracket1, lv_color_white(), LV_STATE_DEFAULT);
-	lv_label_set_text_fmt(labelLeftBracket1, "[  ");
-	
-	lv_obj_t *btnPower = lv_btn_create(lv_scr_act());
-	lv_obj_add_event_cb(btnPower, power_handler, LV_EVENT_ALL, NULL);
-	lv_obj_align_to(btnPower, labelLeftBracket1, LV_ALIGN_OUT_RIGHT_MID, -4, -8);
-	lv_obj_add_style(btnPower, &style, 0);
-	
-	lv_obj_t *labelPower = lv_label_create(btnPower);
-	lv_label_set_text(labelPower, LV_SYMBOL_POWER);
-	lv_obj_center(labelPower);
-	
-	// ----- MENU -----
-	lv_obj_t *labelLeftPipe = lv_label_create(lv_scr_act());
-	lv_obj_align_to(labelLeftPipe, labelPower, LV_ALIGN_OUT_RIGHT_MID, 0, -2);
-	lv_obj_set_style_text_color(labelLeftPipe, lv_color_white(), LV_STATE_DEFAULT);
-	lv_label_set_text_fmt(labelLeftPipe, "  |  ");
-	
-	lv_obj_t *btnMenu = lv_btn_create(lv_scr_act());
-	lv_obj_add_event_cb(btnMenu, menu_handler, LV_EVENT_ALL, NULL);
-	lv_obj_align_to(btnMenu, labelLeftPipe, LV_ALIGN_OUT_RIGHT_MID, -6, -6);
-	lv_obj_add_style(btnMenu, &style, 0);
-	
-	lv_obj_t *labelMenu = lv_label_create(btnMenu);
-	lv_label_set_text(labelMenu, "M");
-	lv_obj_center(labelMenu);
-	
-	lv_obj_t *labelRightPipe = lv_label_create(lv_scr_act());
-	lv_obj_align_to(labelRightPipe, labelMenu, LV_ALIGN_OUT_RIGHT_MID, 0, -3);
-	lv_obj_set_style_text_color(labelRightPipe, lv_color_white(), LV_STATE_DEFAULT);
-	lv_label_set_text_fmt(labelRightPipe, "  |  ");
-	
-	// ----- CLOCK -----
-	lv_obj_t *btnClk = lv_btn_create(lv_scr_act());
-	lv_obj_add_event_cb(btnClk, clk_handler, LV_EVENT_ALL, NULL);
-	lv_obj_align_to(btnClk, labelRightPipe, LV_ALIGN_OUT_RIGHT_MID, -2, -5);
-	lv_obj_add_style(btnClk, &style, 0);
-	
-	lv_obj_t *labelClk = lv_label_create(btnClk);
-	lv_obj_set_style_text_font(labelClk, &clock, LV_STATE_DEFAULT);
-	lv_label_set_text(labelClk, SYMBOL_CLOCK);
-	lv_obj_center(labelClk);
-	
-	lv_obj_t *labelRightBracket1 = lv_label_create(lv_scr_act());
-	lv_obj_align_to(labelRightBracket1, labelClk, LV_ALIGN_OUT_RIGHT_MID, 0, -1);
-	lv_obj_set_style_text_color(labelRightBracket1, lv_color_white(), LV_STATE_DEFAULT);
-	lv_label_set_text_fmt(labelRightBracket1, "  ]");
-	
-	// ----- HOME -----
-	lv_obj_t *btnHome = lv_btn_create(lv_scr_act());
-	lv_obj_add_event_cb(btnHome, home_handler, LV_EVENT_ALL, NULL);
-	lv_obj_align(btnHome, LV_ALIGN_CENTER, 30, 40);
-	lv_obj_add_style(btnHome, &style, 0);
-	
-	lv_obj_t *labelHome = lv_label_create(btnHome);
-	lv_label_set_text(labelHome, LV_SYMBOL_HOME);
-	lv_obj_center(labelHome);
-	
-	// ----- DOWN -----
-	lv_obj_t *labelRightBracket2 = lv_label_create(lv_scr_act());
-	lv_obj_align(labelRightBracket2, LV_ALIGN_BOTTOM_RIGHT, -4, -20);
-	lv_obj_set_style_text_color(labelRightBracket2, lv_color_white(), LV_STATE_DEFAULT);
-	lv_label_set_text_fmt(labelRightBracket2, "  ]");
-	
-	lv_obj_t *btnDown = lv_btn_create(lv_scr_act());
-	lv_obj_add_event_cb(btnDown, down_handler, LV_EVENT_ALL, NULL);
-	lv_obj_align_to(btnDown, labelRightBracket2, LV_ALIGN_OUT_LEFT_MID, 0, -4);
-	lv_obj_add_style(btnDown, &style, 0);
-	
-	lv_obj_t *labelDown = lv_label_create(btnDown);
-	lv_label_set_text(labelDown, LV_SYMBOL_DOWN);
-	lv_obj_center(labelDown);
-	
-	lv_obj_t *labelArrowPipe = lv_label_create(lv_scr_act());
-	lv_obj_align_to(labelArrowPipe, labelDown, LV_ALIGN_OUT_LEFT_MID, 16, -5);
-	lv_obj_set_style_text_color(labelArrowPipe, lv_color_white(), LV_STATE_DEFAULT);
-	lv_label_set_text_fmt(labelArrowPipe, "  |  ");
-	
-	// ----- UP -----
-	lv_obj_t *btnUp = lv_btn_create(lv_scr_act());
-	lv_obj_add_event_cb(btnUp, up_handler, LV_EVENT_ALL, NULL);
-	lv_obj_align_to(btnUp, labelArrowPipe, LV_ALIGN_OUT_LEFT_MID, 0, -5);
-	lv_obj_add_style(btnUp, &style, 0);
-	
-	lv_obj_t *labelUp = lv_label_create(btnUp);
-	lv_label_set_text(labelUp, LV_SYMBOL_UP);
-	lv_obj_center(labelUp);
-	
-	lv_obj_t *labelLeftBracket2 = lv_label_create(lv_scr_act());
-	lv_obj_align_to(labelLeftBracket2, labelUp, LV_ALIGN_OUT_LEFT_MID, 30, -4);
-	lv_obj_set_style_text_color(labelLeftBracket2, lv_color_white(), LV_STATE_DEFAULT);
-	lv_label_set_text_fmt(labelLeftBracket2, "[");
-	
-	// ----- FLOOR -----
-	lv_obj_t *labelFloor = lv_label_create(lv_scr_act());
-	lv_obj_align(labelFloor, LV_ALIGN_LEFT_MID, 20 , -25);
-	lv_obj_set_style_text_font(labelFloor, &dseg70, LV_STATE_DEFAULT);
-	lv_obj_set_style_text_color(labelFloor, lv_color_white(), LV_STATE_DEFAULT);
-	lv_label_set_text_fmt(labelFloor, "%02d.", (int) floor_temperature);
-	
-	// ----- FLOOR DECIMAL -----
-	lv_obj_t *labelFloorDecimal = lv_label_create(lv_scr_act());
-	lv_obj_align_to(labelFloorDecimal, labelFloor, LV_ALIGN_OUT_RIGHT_MID, 4, 8);
-	lv_obj_set_style_text_font(labelFloorDecimal, &dseg40, LV_STATE_DEFAULT);
-	lv_obj_set_style_text_color(labelFloorDecimal, lv_color_white(), LV_STATE_DEFAULT);
-	lv_label_set_text_fmt(labelFloorDecimal, "%01d", (int) (floor_temperature * 10) % 10);
-	
+// bike
+void lv_bike(void) {
 	// ----- CLOCK -----
 	labelClock = lv_label_create(lv_scr_act());
-	lv_obj_align(labelClock, LV_ALIGN_TOP_RIGHT, -10 , 10);
-	lv_obj_set_style_text_font(labelClock, &dseg30, LV_STATE_DEFAULT);
+	lv_obj_align(labelClock, LV_ALIGN_TOP_MID, 0 , 30);
+	lv_obj_set_style_text_font(labelClock, &dseg40, LV_STATE_DEFAULT);
 	lv_obj_set_style_text_color(labelClock, lv_color_white(), LV_STATE_DEFAULT);
-	lv_label_set_text_fmt(labelClock, "00:00");
+	lv_label_set_text_fmt(labelClock, "00:00:00");
 	
-	// ----- SET VALUE -----
-	labelSetValue = lv_label_create(lv_scr_act());
-	lv_obj_align_to(labelSetValue, labelClock, LV_ALIGN_OUT_BOTTOM_MID, -15 , 20);
-	lv_obj_set_style_text_font(labelSetValue, &dseg50, LV_STATE_DEFAULT);
-	lv_obj_set_style_text_color(labelSetValue, lv_color_white(), LV_STATE_DEFAULT);
-	lv_label_set_text_fmt(labelSetValue, "%02d", 22);
+	// ----- CLOCK TITLE -----
+	lv_label_t *labelClockTitle = lv_label_create(lv_scr_act());
+	lv_obj_align_to(labelClockTitle, labelClock, LV_ALIGN_OUT_TOP_LEFT, 0 , 0);
+	lv_obj_set_style_text_color(labelClockTitle, lv_color_white(), LV_STATE_DEFAULT);
+	lv_label_set_text_fmt(labelClockTitle, "CLOCK");
 	
-	// ----- CELSIUS -----
-	lv_obj_t *labelCelsius1 = lv_label_create(lv_scr_act());
-	lv_obj_align_to(labelCelsius1, labelSetValue, LV_ALIGN_OUT_RIGHT_MID, 5, -20);
-	lv_obj_set_style_text_color(labelCelsius1, lv_color_white(), LV_STATE_DEFAULT);
-	lv_label_set_text_fmt(labelCelsius1, "c");
+	// ----- HORIZONTAL LINE 1 -----
+	lv_label_t *labelHLine1 = lv_label_create(lv_scr_act());
+	lv_obj_align_to(labelHLine1, labelClock, LV_ALIGN_OUT_BOTTOM_LEFT, 0, 0);
+	lv_obj_set_style_text_color(labelHLine1, lv_color_white(), LV_STATE_DEFAULT);
+	lv_label_set_text_fmt(labelHLine1, "..........................................");
 	
-	lv_obj_t *labelCelsius2 = lv_label_create(lv_scr_act());
-	lv_obj_align_to(labelCelsius2, labelFloor, LV_ALIGN_OUT_RIGHT_MID, 10, -30);
-	lv_obj_set_style_text_color(labelCelsius2, lv_color_white(), LV_STATE_DEFAULT);
-	lv_label_set_text_fmt(labelCelsius2, "c");
+	// ----- SPEED TITLE -----
+	lv_label_t *labelSpeedTitle = lv_label_create(lv_scr_act());
+	lv_obj_align_to(labelSpeedTitle, labelHLine1, LV_ALIGN_OUT_BOTTOM_LEFT, 0, 0);
+	lv_obj_set_style_text_color(labelSpeedTitle, lv_color_white(), LV_STATE_DEFAULT);
+	lv_label_set_text_fmt(labelSpeedTitle, "SPEED   KM/H");
+	
+	// ----- SPEED -----
+	labelSpeed = lv_label_create(lv_scr_act());
+	lv_obj_align_to(labelSpeed, labelSpeedTitle, LV_ALIGN_OUT_BOTTOM_LEFT, 0, 0);
+	lv_obj_set_style_text_font(labelSpeed, &dseg40, LV_STATE_DEFAULT);
+	lv_obj_set_style_text_color(labelSpeed, lv_color_white(), LV_STATE_DEFAULT);
+	lv_label_set_text_fmt(labelSpeed, "25");
+	
+	// ----- HORIZONTAL LINE 2 -----
+	lv_label_t *labelHLine2 = lv_label_create(lv_scr_act());
+	lv_obj_align_to(labelHLine2, labelSpeed, LV_ALIGN_OUT_BOTTOM_LEFT, 0, 0);
+	lv_obj_set_style_text_color(labelHLine2, lv_color_white(), LV_STATE_DEFAULT);
+	lv_label_set_text_fmt(labelHLine2, "..........................................");
+	
+	// ----- XLR8 TITLE -----
+	lv_label_t *labelXLR8Title = lv_label_create(lv_scr_act());
+	lv_obj_align_to(labelXLR8Title, labelHLine2, LV_ALIGN_OUT_BOTTOM_LEFT, 0 , 0);
+	lv_obj_set_style_text_color(labelXLR8Title, lv_color_white(), LV_STATE_DEFAULT);
+	lv_label_set_text_fmt(labelXLR8Title, "ACC");
+	
+	// ----- XLR8 -----
+	labelXLR8 = lv_label_create(lv_scr_act());
+	lv_obj_align_to(labelXLR8, labelXLR8Title, LV_ALIGN_OUT_BOTTOM_LEFT, 0, 0);
+	lv_obj_set_style_text_color(labelXLR8, lv_color_white(), LV_STATE_DEFAULT);
+	lv_label_set_text_fmt(labelXLR8, LV_SYMBOL_UP);
 }
 
 /************************************************************************/
@@ -304,7 +176,7 @@ void lv_termostato(void) {
 static void task_lcd(void *pvParameters) {
 	int px, py;
 
-	lv_termostato();
+	lv_bike();
 
 	for (;;)  {
 		lv_tick_inc(50);
@@ -319,9 +191,9 @@ static void task_rtc(void *pvParameters) {
 		.month = 05,
 		.day = 01,
 		.week = 1,
-		.hour = 17,
-		.minute = 00,
-		.second = 0,
+		.hour = 22,
+		.minute = 22,
+		.second = 22,
 	};
 
 	RTC_init(RTC, ID_RTC, now, RTC_IER_SECEN);
@@ -333,12 +205,7 @@ static void task_rtc(void *pvParameters) {
 			rtc_get_date(RTC, &now.year, &now.month, &now.day, &now.week);
 
 			/* Atualização do valor do clock */
-			if (now.second % 2 == 0) {
-				lv_label_set_text_fmt(labelClock, "%02d:%02d", now.hour, now.minute);
-			}
-			else {
-				lv_label_set_text_fmt(labelClock, "%02d %02d", now.hour, now.minute);
-			}
+			lv_label_set_text_fmt(labelClock, "%02d:%02d:%02d", now.hour, now.minute, now.second);
 		}
 		vTaskDelay(700);
 	}
