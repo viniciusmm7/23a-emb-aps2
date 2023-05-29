@@ -98,7 +98,7 @@ void RTT_Handler(void) {
 
 	/* IRQ due to Alarm */
 	if ((ul_status & RTT_SR_ALMS) == RTT_SR_ALMS) {
-		
+		RTT_init(1000, 6000, RTT_MR_ALMIEN);
 	}
 }
 
