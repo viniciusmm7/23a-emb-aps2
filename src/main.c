@@ -100,7 +100,7 @@ void callback_spd_sensor(void);
 /************************************************************************/
 
 void callback_spd_sensor(void) {
-
+	
 	// botar tempo na queue
 	// zerar timer
 }
@@ -238,6 +238,10 @@ static void task_spd(void *pvParameters) {
 	pmc_enable_periph_clk(ID_PIOA);
 	pio_configure(PIOA, PIO_INPUT, SPD_IDX_MASK, PIO_PULLUP | PIO_DEBOUNCE);
 	pio_handler_set(PIOA, ID_PIOA, SPD_IDX_MASK, PIO_IT_FALL_EDGE, callback_spd_sensor);
+	pio_enable_interrupt(PIOA, SPD_IDX_MASK);
+	pio_get_interrupt_status(PIOA);
+	NVIC_EnableIRQ(ID_PIOA);
+	NVIC_SetPriority(ID_PIOA, 4);
 
 	for (;;) {
 
@@ -389,8 +393,8 @@ int main(void) {
 	}
 
 	/* Queue for speed sensor data */
-	xQueueSpd = xQueueCreate(100, sizeof(adcData));
-	if (xQueueADC == NULL) {
+	xQueueSpd = xQueueCreate(100, sizeof(float));
+	if (xQueueSpd == NULL) {
 		printf("Failed to create speed sensor data queue\n");
 	}
 	
