@@ -166,7 +166,9 @@ void lv_bike(void) {
 	labelXLR8 = lv_label_create(lv_scr_act());
 	lv_obj_align_to(labelXLR8, labelXLR8Title, LV_ALIGN_OUT_BOTTOM_LEFT, 0, 0);
 	lv_obj_set_style_text_color(labelXLR8, lv_color_white(), LV_STATE_DEFAULT);
-	lv_label_set_text_fmt(labelXLR8, LV_SYMBOL_UP);
+	lv_label_set_text_fmt(labelXLR8, LV_SYMBOL_UP); /* If acc is positive */
+	//lv_label_set_text_fmt(labelXLR8, LV_SYMBOL_MINUS); /* If acc is aprox zero */
+	//lv_label_set_text_fmt(labelXLR8, LV_SYMBOL_DOWN); /* If acc is negative */
 }
 
 /************************************************************************/
