@@ -7,6 +7,7 @@
 #include "ili9341.h"
 #include "lvgl.h"
 #include "touch/touch.h"
+#include <math.h>
 
 LV_FONT_DECLARE(dseg40);
 
@@ -260,7 +261,10 @@ static void task_spd(void *pvParameters) {
 	for (;;) {
 
 		if (xSemaphoreTake(xSemaphoreRTTOverflow, 0)) {
-			
+			last_speed = 0;
+			speed = 0;
+			acc = 0;
+			lv_label_set_text_fmt(labelSpeed, "%d", round(speed));
 		}
 
 		if (xQueueReceive(xQueueInterval, (uint32_t *)&interval, 0)) {
