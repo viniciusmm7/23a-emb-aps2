@@ -13,6 +13,15 @@ LV_FONT_DECLARE(dseg40);
 #define SYMBOL_CLOCK "\xEF\x80\x97"
 
 /************************************************************************/
+/* SPEED SENSOR CONFIG                                                  */
+/************************************************************************/
+#define WHEEL_DIAM 0.508	// 20"
+#define SPD_PIO			PIOA
+#define SPD_PIO_ID		ID_PIOA
+#define SPD_IDX			19
+#define SPD_IDX_MASK	(1 << SPD_IDX)
+
+/************************************************************************/
 /* LCD / LVGL                                                           */
 /************************************************************************/
 
@@ -55,6 +64,8 @@ typedef struct  {
 #define TASK_LCD_STACK_PRIORITY				(tskIDLE_PRIORITY)
 #define TASK_RTC_STACK_SIZE					(1024*6/sizeof(portSTACK_TYPE))
 #define TASK_RTC_STACK_PRIORITY				(tskIDLE_PRIORITY)
+#define TASK_SPD_STACK_SIZE					(1024*6/sizeof(portSTACK_TYPE))
+#define TASK_SPD_STACK_PRIORITY				(tskIDLE_PRIORITY)
 
 extern void vApplicationStackOverflowHook(xTaskHandle *pxTask,  signed char *pcTaskName);
 extern void vApplicationIdleHook(void);
@@ -76,11 +87,24 @@ extern void vApplicationMallocFailedHook(void) {
 }
 
 SemaphoreHandle_t xSemaphoreRTC;
+QueueHandle_t xQueueSpd;
 
 /************************************************************************/
 /* PROTOTYPES                                                           */
 /************************************************************************/
 void RTC_init(Rtc *rtc, uint32_t id_rtc, calendar t, uint32_t irq_type);
+void callback_spd_sensor(void);
+
+/************************************************************************/
+/* CALLBACKS                                                            */
+/************************************************************************/
+
+void callback_spd_sensor(void) {
+
+	// botar tempo na queue
+	// zerar timer
+}
+
 
 /************************************************************************/
 /* lvgl                                                                 */
@@ -95,13 +119,13 @@ void RTC_Handler(void) {
 	
 	/* seccond tick */
 	if ((ul_status & RTC_SR_SEC) == RTC_SR_SEC) {
-		// o código para irq de segundo vem aqui
+		// o cï¿½digo para irq de segundo vem aqui
 		xSemaphoreGiveFromISR(xSemaphoreRTC, 0);
 	}
 	
 	/* Time or date alarm */
 	if ((ul_status & RTC_SR_ALARM) == RTC_SR_ALARM) {
-		// o código para irq de alame vem aqui
+		// o cï¿½digo para irq de alame vem aqui
 	}
 
 	rtc_clear_status(RTC, RTC_SCCR_SECCLR);
@@ -202,10 +226,21 @@ static void task_rtc(void *pvParameters) {
 			rtc_get_time(RTC, &now.hour, &now.minute, &now.second);
 			rtc_get_date(RTC, &now.year, &now.month, &now.day, &now.week);
 
-			/* Atualização do valor do clock */
+			/* Atualizaï¿½ï¿½o do valor do clock */
 			lv_label_set_text_fmt(labelClock, "%02d:%02d:%02d", now.hour, now.minute, now.second);
 		}
 		vTaskDelay(700);
+	}
+}
+
+static void task_spd(void *pvParameters) {
+
+	pmc_enable_periph_clk(ID_PIOA);
+	pio_configure(PIOA, PIO_INPUT, SPD_IDX_MASK, PIO_PULLUP | PIO_DEBOUNCE);
+	pio_handler_set(PIOA, ID_PIOA, SPD_IDX_MASK, PIO_IT_FALL_EDGE, callback_spd_sensor);
+
+	for (;;) {
+
 	}
 }
 
@@ -331,12 +366,6 @@ int main(void) {
 	#endif
 	configure_touch();
 	configure_lvgl();
-	
-	/* Attempt to create a semaphore. */
-	xSemaphoreRTC = xSemaphoreCreateBinary();
-	if (xSemaphoreRTC == NULL) {
-		printf("Failed to create RTC semaphore\n");
-	}
 
 	/* Create task to control LCD */
 	if (xTaskCreate(task_lcd, "LCD", TASK_LCD_STACK_SIZE, NULL, TASK_LCD_STACK_PRIORITY, NULL) != pdPASS) {
@@ -347,8 +376,25 @@ int main(void) {
 	if (xTaskCreate(task_rtc, "RTC", TASK_RTC_STACK_SIZE, NULL, TASK_RTC_STACK_PRIORITY, NULL) != pdPASS) {
 		printf("Failed to create RTC task\r\n");
 	}
+
+	/* Create task to calculate speed */
+	if (xTaskCreate(task_spd, "SPD", TASK_SPD_STACK_SIZE, NULL, TASK_SPD_STACK_PRIORITY, NULL) != pdPASS) {
+		printf("Failed to create SPD task\r\n");
+	}
+
+	/* Semaphore for RTC */
+	xSemaphoreRTC = xSemaphoreCreateBinary();
+	if (xSemaphoreRTC == NULL) {
+		printf("Failed to create RTC semaphore\n");
+	}
+
+	/* Queue for speed sensor data */
+	xQueueSpd = xQueueCreate(100, sizeof(adcData));
+	if (xQueueADC == NULL) {
+		printf("Failed to create speed sensor data queue\n");
+	}
 	
-	/* Start the scheduler. */
+	/* Start the scheduler */
 	vTaskStartScheduler();
 
 	while(1){ }
