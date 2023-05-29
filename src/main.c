@@ -80,6 +80,7 @@ extern void vApplicationMallocFailedHook(void) {
 	configASSERT( ( volatile void * ) NULL );
 }
 
+QueueHandle_t xQueueInterval;
 SemaphoreHandle_t xSemaphoreRTC;
 SemaphoreHandle_t xSemaphoreRTTOverflow;
 
@@ -132,7 +133,10 @@ void RTC_Handler(void) {
 }
 
 void callback_spd(void) {
-	
+	uint32_t value = rtt_read_timer_value(RTT);
+	RTT_init(1000, 6000, RTT_MR_ALMIEN);
+	BaseType_t xHigherPriorityTaskWoken = pdTRUE;
+	xQueueSendFromISR(xQueueInterval, &value, &xHigherPriorityTaskWoken);
 }
 
 /************************************************************************/
@@ -248,9 +252,18 @@ static void task_spd(void *pvParameters) {
 
 	RTT_init(1000, 6000, RTT_MR_ALMIEN);
 
+	float last_speed = 0;
+	float speed = 0;
+	float acc = 0;
+	uint32_t interval;
+
 	for (;;) {
 
 		if (xSemaphoreTake(xSemaphoreRTTOverflow, 0)) {
+			
+		}
+
+		if (xQueueReceive(xQueueInterval, (uint32_t *)&interval, 0)) {
 			
 		}
 		
@@ -420,6 +433,12 @@ int main(void) {
 	xSemaphoreRTTOverflow = xSemaphoreCreateBinary();
 	if (xSemaphoreRTTOverflow == NULL) {
 		printf("Failed to create RTT overflow semaphore\n");
+	}
+	
+	/* Attempt to create a queue. */
+	xQueueInterval = xQueueCreate(100, sizeof(uint32_t));
+	if (xQueueInterval == NULL) {
+		printf("Failed to create intervals queue\n");
 	}
 
 	/* Create task to control LCD */
