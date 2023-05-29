@@ -7,7 +7,6 @@
 #include "ili9341.h"
 #include "lvgl.h"
 #include "touch/touch.h"
-#include <math.h>
 
 LV_FONT_DECLARE(dseg40);
 
@@ -17,6 +16,8 @@ LV_FONT_DECLARE(dseg40);
 #define SPD_PIO_ID		ID_PIOA
 #define SPD_IDX			19
 #define SPD_IDX_MASK	(1 << SPD_IDX)
+#define WHEEL_DIAM 		0.508
+#define PI 				3.141592
 
 /************************************************************************/
 /* LCD / LVGL                                                           */
@@ -268,7 +269,12 @@ static void task_spd(void *pvParameters) {
 		}
 
 		if (xQueueReceive(xQueueInterval, (uint32_t *)&interval, 0)) {
-			
+			speed = WHEEL_DIAM * PI * 3600.0 / (float) interval;
+			acc = (speed - last_speed) / (float) interval;
+			last_speed = speed;
+			lv_label_set_text_fmt(labelSpeed, "%d", (int) speed);
+			printf("spd: %d\n", (int) speed);
+			printf("int: %d\n", interval);
 		}
 		
 	}
