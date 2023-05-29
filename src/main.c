@@ -81,6 +81,7 @@ extern void vApplicationMallocFailedHook(void) {
 }
 
 SemaphoreHandle_t xSemaphoreRTC;
+SemaphoreHandle_t xSemaphoreRTTOverflow;
 
 /************************************************************************/
 /* PROTOTYPES                                                           */
@@ -99,6 +100,8 @@ void RTT_Handler(void) {
 	/* IRQ due to Alarm */
 	if ((ul_status & RTT_SR_ALMS) == RTT_SR_ALMS) {
 		RTT_init(1000, 6000, RTT_MR_ALMIEN);
+		BaseType_t xHigherPriorityTaskWoken = pdFALSE;
+		xSemaphoreGiveFromISR(xSemaphoreRTTOverflow, &xHigherPriorityTaskWoken);
 	}
 }
 
@@ -246,6 +249,10 @@ static void task_spd(void *pvParameters) {
 	RTT_init(1000, 6000, RTT_MR_ALMIEN);
 
 	for (;;) {
+
+		if (xSemaphoreTake(xSemaphoreRTTOverflow, 0)) {
+			
+		}
 		
 	}
 
@@ -407,6 +414,12 @@ int main(void) {
 	xSemaphoreRTC = xSemaphoreCreateBinary();
 	if (xSemaphoreRTC == NULL) {
 		printf("Failed to create RTC semaphore\n");
+	}
+
+	/* Attempt to create a semaphore. */
+	xSemaphoreRTTOverflow = xSemaphoreCreateBinary();
+	if (xSemaphoreRTTOverflow == NULL) {
+		printf("Failed to create RTT overflow semaphore\n");
 	}
 
 	/* Create task to control LCD */
