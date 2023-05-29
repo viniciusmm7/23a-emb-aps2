@@ -177,7 +177,7 @@ void lv_bike(void) {
 	lv_obj_align_to(labelSpeed, labelSpeedTitle, LV_ALIGN_OUT_BOTTOM_LEFT, 0, 10);
 	lv_obj_set_style_text_font(labelSpeed, &dseg40, LV_STATE_DEFAULT);
 	lv_obj_set_style_text_color(labelSpeed, lv_color_white(), LV_STATE_DEFAULT);
-	lv_label_set_text_fmt(labelSpeed, "25");
+	lv_label_set_text_fmt(labelSpeed, "0");
 	
 	// ----- HORIZONTAL LINE 2 -----
 	lv_label_t *labelHLine2 = lv_label_create(lv_scr_act());
@@ -222,9 +222,9 @@ static void task_rtc(void *pvParameters) {
 		.month = 05,
 		.day = 01,
 		.week = 1,
-		.hour = 22,
-		.minute = 22,
-		.second = 22,
+		.hour = 17,
+		.minute = 12,
+		.second = 07,
 	};
 
 	RTC_init(RTC, ID_RTC, now, RTC_IER_SECEN);
@@ -265,16 +265,27 @@ static void task_spd(void *pvParameters) {
 			last_speed = 0;
 			speed = 0;
 			acc = 0;
-			lv_label_set_text_fmt(labelSpeed, "%d", round(speed));
+			lv_label_set_text_fmt(labelSpeed, "0");
+			lv_label_set_text_fmt(labelXLR8, LV_SYMBOL_MINUS);
 		}
 
 		if (xQueueReceive(xQueueInterval, (uint32_t *)&interval, 0)) {
 			speed = WHEEL_DIAM * PI * 3600.0 / (float) interval;
-			acc = (speed - last_speed) / (float) interval;
+			acc = (speed - last_speed) * 1000 / (float) interval;
 			last_speed = speed;
 			lv_label_set_text_fmt(labelSpeed, "%d", (int) speed);
-			printf("spd: %d\n", (int) speed);
-			printf("int: %d\n", interval);
+
+			if (acc > 1) {
+				lv_label_set_text_fmt(labelXLR8, LV_SYMBOL_UP);
+			}
+
+			else if (acc < -1) {
+				lv_label_set_text_fmt(labelXLR8, LV_SYMBOL_DOWN);
+			}
+
+			else {
+				lv_label_set_text_fmt(labelXLR8, LV_SYMBOL_MINUS);
+			}
 		}
 		
 	}
