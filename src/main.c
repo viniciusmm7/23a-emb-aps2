@@ -86,10 +86,21 @@ SemaphoreHandle_t xSemaphoreRTC;
 /* PROTOTYPES                                                           */
 /************************************************************************/
 void RTC_init(Rtc *rtc, uint32_t id_rtc, calendar t, uint32_t irq_type);
+static void RTT_init(float freqPrescale, uint32_t IrqNPulses, uint32_t rttIRQSource);
 
 /************************************************************************/
-/* callbacks                                                                 */
+/* callbacks                                                            */
 /************************************************************************/
+
+void RTT_Handler(void) {
+	uint32_t ul_status;
+	ul_status = rtt_get_status(RTT);
+
+	/* IRQ due to Alarm */
+	if ((ul_status & RTT_SR_ALMS) == RTT_SR_ALMS) {
+		
+	}
+}
 
 /**
 * \brief Interrupt handler for the RTC. Refresh the display.
@@ -232,6 +243,8 @@ static void task_spd(void *pvParameters) {
 	NVIC_EnableIRQ(ID_PIOA);
 	NVIC_SetPriority(ID_PIOA, 4);
 
+	RTT_init(1000, 6000, RTT_MR_ALMIEN);
+
 	for (;;) {
 		
 	}
@@ -268,6 +281,35 @@ static void configure_console(void) {
 
 	/* Specify that stdout should not be buffered. */
 	setbuf(stdout, NULL);
+}
+
+static void RTT_init(float freqPrescale, uint32_t IrqNPulses, uint32_t rttIRQSource) {
+
+	uint16_t pllPreScale = (int) (((float) 32768) / freqPrescale);
+
+	rtt_sel_source(RTT, false);
+	rtt_init(RTT, pllPreScale);
+
+	if (rttIRQSource & RTT_MR_ALMIEN) {
+		uint32_t ul_previous_time;
+		ul_previous_time = rtt_read_timer_value(RTT);
+		while (ul_previous_time == rtt_read_timer_value(RTT));
+		rtt_write_alarm_time(RTT, IrqNPulses+ul_previous_time);
+	}
+
+	/* config NVIC */
+	NVIC_DisableIRQ(RTT_IRQn);
+	NVIC_ClearPendingIRQ(RTT_IRQn);
+	NVIC_SetPriority(RTT_IRQn, 4);
+	NVIC_EnableIRQ(RTT_IRQn);
+
+	/* Enable RTT interrupt */
+	if (rttIRQSource & (RTT_MR_RTTINCIEN | RTT_MR_ALMIEN)) {
+		rtt_enable_interrupt(RTT, rttIRQSource);
+	}
+	else {
+		rtt_disable_interrupt(RTT, RTT_MR_RTTINCIEN | RTT_MR_ALMIEN);
+	}
 }
 
 /**
